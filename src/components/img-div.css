@@ -1,0 +1,46 @@
+
+.d1{
+    width:80%;
+    height:350px;
+    display:flex;
+    margin:100px;
+    margin-top:50px;
+    margin-bottom:50px;
+    border-radius:2%;
+}
+.d2 {
+    width: 35%;
+    background-color: white;
+    position: relative;
+    top: 50px;
+    left: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    height:250px;
+}
+
+
+.s1{
+    color:orange;
+}
+h3{
+    font-size:1rem;
+}
+p{
+    font-size:0.9rem;
+}
+.b1 {
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self:flex-start;
+}
+.tr1{
+    font-size:1.5em;
+}
+.tr2{
+    font-size:0.9em;
+}

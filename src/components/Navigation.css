@@ -1,0 +1,40 @@
+.nhere{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fbf8f8;
+        padding: 15px 30px;
+        text-align: right;
+        border-color: black;
+        border-width: 10px;
+}
+.nav-left {
+        display: flex;
+        align-items: center;
+}
+.nav-logo {
+        height: 40px;
+        width: 40px;
+}
+.nav-text {
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 30px;
+        color: rgb(236, 131, 78);
+}
+.nhere a {
+        margin-left: 15px;
+        text-decoration: none;
+        color: black;
+}
+.list {
+        margin-left: 15px;
+        display: inline-block;
+        color: green;
+        cursor: pointer;
+        border-radius: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(67, 65, 65);
+        padding: 5px 10px;
+}
