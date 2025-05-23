@@ -9,53 +9,187 @@
     display: flex;
     flex-wrap:wrap;
 }
-.ct1{
-    width:700px;
-    height:150px;
-    border-style:solid;
-    border-width:1px;
-    border-color:rgb(147, 147, 147);
-    border-radius:10px;
-}
-.ct2{
+.p1{
     margin-left:10px;
-    border-color:rgb(147, 147, 147);
-    border-radius:10px;
-    height:150px;
-    width:300px;
-    border-style:solid;
-    border-width:1px;
-}
-.ct3{
-    margin-top:10px;
-    margin-left:10px;
-    height:50px;
-    width:340px;
-    border-color:rgb(147, 147, 147);
-    border-radius:10px;
-    border-style:solid;
-    border-width:1px;
-    text-align:center;
-    line-height:50px;
-    color:rgb(70, 65, 65);
-}
-p{
+    font-size:0.8em;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
     margin-left:10px;
 }
-.ct4{
-    margin-left:10px;
-    width:300px;
-    border-color:rgb(147, 147, 147);
-    border-radius:10px;
-    border-style:solid;
-    border-width:1px;
-    margin-top:10px;
+/* Container with room description */
+.ct1 {
+  width: 700px;
+  min-height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-left: 10px;
+  padding: 16px 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Segoe UI', sans-serif;
 }
+
+.ct1 h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ct1 .location,
+.ct1 .category {
+  display: flex;
+  align-items: center;
+  color: #444;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.ct1 .location i,
+.ct1 .category i {
+  color: #e4a76d;
+  margin-right: 6px;
+}
+
+/* Favorite Heart */
+.ct1 .favorite-icon {
+  position: relative;
+  left: 600px;
+  bottom: 100px;
+  font-size: 18px;
+}
+
+/* Right section container */
+.ct2 {
+  width: 300px;
+  min-height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px 20px;
+  background-color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  margin-left:10px;
+}
+
+.ct2 label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+  color: #333;
+}
+
+.ct2 input,
+.ct2 select {
+  width: 100%;
+  height: 40px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Info boxes for Beds, Bathrooms etc. */
+.ct3 {
+  width: 340px;
+  height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin: 10px 10px 0 10px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 14px;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ct3 i {
+  margin-right: 8px;
+  color: #e4a76d;
+}
+
 .ct5{
     width:700px;
-    border-color:rgb(147, 147, 147);
+    border: 1px solid #ddd;
     border-radius:10px;
     border-style:solid;
     border-width:1px;
     margin-top:10px;
+    margin-left:10px;
+}
+.ct5 h1{
+    font-size: 15px;
+    margin-left:10px;
+    margin-top:20px;
+}
+.pt-btn{
+    width: 300px;
+    background-color: orange;
+    color:white;
+    height:150px;
+    border-width:0px;
+}
+
+.ct4  {
+  width: 320px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-left: 10px;
+}
+
+.ct4 table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.ct4  td {
+  padding: 8px 0;
+  color: #333;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.ct4  td:first-child {
+  text-align: left;
+}
+
+.ct4  td:last-child {
+  text-align: right;
+}
+
+.ct4  tr:last-child td {
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.instant-book {
+  width: 100%;
+  background-color: #e4bc8a;
+  border: none;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.note {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  margin-top: 12px;
 }

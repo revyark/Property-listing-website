@@ -81,4 +81,40 @@
 .relative {
     position: relative;
   }
-  
+
+/* Contain the calendar properly */
+.search-bar {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Fix calendar overflow */
+.search-bar .rdrCalendarWrapper {
+  border-radius: 0.5rem !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  max-width: 350px;
+}
+
+/* Prevent weird layout blowout */
+.search-bar .rdrDateRangeWrapper {
+  background-color: white;
+}
+
+/* Ensure the popup stays close to the input */
+.search-bar .absolute {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  z-index: 20;
+}
