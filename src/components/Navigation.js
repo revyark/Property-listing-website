@@ -13,7 +13,7 @@ function Navi(){
             <a href="/">English</a>
             <a href="/signup">Signup</a>
             <a href="/login">Login</a>
-            <a href="/login"><div className="list">List your space</div></a>
+            <a href="/list"><div className="list">List your space</div></a>
           </div>
         </nav>
         </>

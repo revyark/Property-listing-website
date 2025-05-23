@@ -4,6 +4,11 @@ import card1 from "./images/card1.png";
 import "./PropertyDetails.css";
 import user from "./images/user.jpg";
 import p5 from "./images/p5.jpg";
+import { DateRange } from 'react-date-range';
+import { enUS } from 'date-fns/locale';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+
 const PropertyDetails = () => {
   const { id } = useParams();
 
@@ -78,7 +83,20 @@ const PropertyDetails = () => {
     "Pets live on this property",
     "Wheelchair Accessible"
   ];
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    },
+  ]);
 
+  const formatDisplay = () => {
+    const start = dateRange[0].startDate.toLocaleDateString();
+    const end = dateRange[0].endDate.toLocaleDateString();
+    return `${start} - ${end}`;
+  }
   return (
     <div style={{ padding: "2rem" }}>
       <h2>Property Details for ID: {id.title}</h2>
@@ -99,16 +117,31 @@ const PropertyDetails = () => {
           </div>
           <div className="favorite-icon">❤️</div>
         </div>
-        <div className="ct2">
-          <p className="p1">
-            Choose Dates
-          </p>
-          <p className="p1">
-            <input type="text" placeholder="check in" />
-            <br />
-            <br />
-            <input type="text" placeholder="guests" />
-          </p>
+        < div className="ct2">
+         <p className="p1">Choose Dates</p>
+      <div className="calendar-wrapper">
+        <input
+          type="text"
+          placeholder="Add dates"
+          className="calendar-input"
+          onClick={() => setShowCalendar(!showCalendar)}
+          readOnly
+          value={formatDisplay()}
+        />
+        {showCalendar && (
+          <div className="calendar-dropdown">
+            <DateRange
+              locale={enUS}
+              editableDateInputs={true}
+              onChange={item => setDateRange([item.selection])}
+              moveRangeOnFirstSelection={false}
+              ranges={dateRange}
+            />
+          </div>
+        )}
+      </div>
+      <br />
+      <input type="text" placeholder="guests" className="guest-input" />
         </div>
         <div className="ct3">🛏 16 beds</div>
         <div className="ct3">🛁 8 bathrooms</div>
@@ -303,4 +336,4 @@ const PropertyDetails = () => {
   );
 };
 
-export default PropertyDetails;
+export default PropertyDetails
