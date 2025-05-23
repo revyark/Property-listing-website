@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import Slider from 'react-slick';
 import { DateRange } from 'react-date-range';
 import 'slick-carousel/slick/slick.css';
@@ -10,6 +10,10 @@ import image1 from './images/image1.jpg';
 import image2 from './images/image2.jpg';
 import image3 from './images/image3.jpg';
 import { enUS } from 'date-fns/locale';
+
+
+
+
 
 const HeroCarousel = () => {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -39,6 +43,9 @@ const HeroCarousel = () => {
     }
     return `${startDate.toDateString()} - ${endDate.toDateString()}`;
   };
+  const [showGuestDropdown, setShowGuestDropdown] = useState(false);
+  const [guests, setGuests] = useState({ adults: 1, children: 0, infants: 0 });
+  const [petsAllowed, setPetsAllowed] = useState(false);
 
   return (
     <div className="carousel-container">
@@ -84,8 +91,60 @@ const HeroCarousel = () => {
           )}
         </div>
 
-        <input type="text" placeholder="Guests" className="search-input" />
-        <button className="search-button">🔍</button>
+        <div className="relative">
+  <input
+    type="text"
+    placeholder="Guests"
+    className="search-input"
+    onClick={() => setShowGuestDropdown(!showGuestDropdown)}
+    readOnly
+    value={
+  guests.adults === 1 && guests.children === 0 && guests.infants === 0
+    ? 'Guests'
+    : `${guests.adults} Adult${guests.adults > 1 ? 's' : ''}, ` +
+      `${guests.children} Child${guests.children !== 1 ? 'ren' : ''}, ` +
+      `${guests.infants} Infant${guests.infants !== 1 ? 's' : ''}`
+}
+/>
+  {showGuestDropdown && (
+  <div className="guest-dropdown">
+    {['adults', 'children', 'infants'].map(type => (
+      <div className="guest-row" key={type}>
+        <div className="guest-label">
+          <span className="guest-title capitalize">{type}</span>
+          <span className="guest-subtitle">
+            {type === 'adults' ? 'Ages 13 or above' :
+             type === 'children' ? 'Ages 2–12' :
+             'Under 2'}
+          </span>
+        </div>
+        <div className="guest-controls">
+          <button onClick={() => setGuests(prev => ({ ...prev, [type]: Math.max(0, prev[type] - 1) }))} className="guest-button">-</button>
+          <span className="guest-count">{guests[type]}</span>
+          <button onClick={() => setGuests(prev => ({ ...prev, [type]: prev[type] + 1 }))} className="guest-button">+</button>
+        </div>
+      </div>
+    ))}
+
+    <div className="guest-row border-top">
+      <div className="guest-label">
+        <span className="guest-title">Travelling with pets?</span>
+        <span className="guest-subtitle">Service animals allowed</span>
+      </div>
+      <label className="switch">
+        <input
+          type="checkbox"
+          checked={petsAllowed}
+          onChange={() => setPetsAllowed(prev => !prev)}
+        />
+        <span className="slider round"></span>
+      </label>
+    </div>
+  </div>
+)}
+
+</div>
+  <button className="search-button">🔍</button>
       </div>
     </div>
   );

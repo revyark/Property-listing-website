@@ -82,18 +82,6 @@
     position: relative;
   }
 
-/* Contain the calendar properly */
-.search-bar {
-  position: relative;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  background: white;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
 
 /* Fix calendar overflow */
 .search-bar .rdrCalendarWrapper {
@@ -117,4 +105,115 @@
   padding: 1rem;
   border-radius: 0.75rem;
   z-index: 20;
+}
+.guest-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 350px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.guest-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guest-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.guest-subtitle {
+  font-size: 0.75rem;
+  color: #717171;
+}
+
+.guest-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.guest-button {
+  width: 32px;
+  height: 32px;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.guest-button:hover {
+  border-color: #fb923c;
+}
+
+.guest-count {
+  width: 24px;
+  text-align: center;
+}
+
+.border-top {
+  border-top: 1px solid #e4e4e4;
+  padding-top: 16px;
+}
+
+/* Toggle switch for pets */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #fb923c;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
 }
