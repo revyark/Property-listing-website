@@ -38,8 +38,15 @@ const PropertyDetails = () => {
             <h1>About this listing</h1>
             <p className="p1">Situated in the famous Marais district surrounded by boutiques, monuments and museums, the Hotel Paris Rivoli offers three-star accommodations in the most desirable part of Paris.</p>
             <h1>The Space</h1>
-            <table><tr><td>2 Kitchen</td><td>🛏 16 beds</td><td>🛁 8 bathrooms</td></tr></table>
+            <table className="list-tb"><tr><td>2 Kitchen</td><td>🛏 16 beds</td><td>🛁 8 bathrooms</td></tr></table><hr style={{width:'670px',color:'#656161'}}/>
+            <h1>The Space</h1>
+            <table className="list-tb"><tr><td>Parking</td><td>🛏 Free Wifi</td><td>🛁 Air conditioning</td></tr></table><hr style={{width:'670px',color:'#656161'}}/>
+            <h1>Safety Features</h1>
+            <table className="list-tb"><tr><td>First Aid Box</td><td>🛏 Safety Guard</td><td>🛁 Smoke Detector</td></tr></table><hr style={{width:'670px',color:'#656161'}}/>
+            <h1>Reviews</h1>
+            <p className="p1">No reviews yet</p><hr style={{width:'670px',color:'#656161'}}/>
             </p>
+            
         </div>
         
         <div className="ct4" style={{wordspacing:'30px'}}>
