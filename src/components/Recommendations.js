@@ -86,8 +86,8 @@ function Recommendations() {
   return (
     <div className="app">
       <h1>Best Recommendations</h1>
-      <p className="subtitle">
-        Discover our exclusive selection of the finest one-of-a-kind luxury properties architectural masterpieces.
+      <p className="subtitle-rec">
+        Discover the top rated properties by our users
       </p>
       <div className="card-container">
         {properties.map((prop, index) => (

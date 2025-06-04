@@ -1,7 +1,6 @@
 import React from "react";
 import "./PropertyCard.css";
 import { Link } from "react-router-dom";
-import "./PropertyCard.css";
 
 const PropertyCard = ({ id, image, title, location, area, price, bedrooms, bathrooms }) => {
   return (
@@ -12,7 +11,8 @@ const PropertyCard = ({ id, image, title, location, area, price, bedrooms, bathr
           <h4>{title}</h4>
           <p className="location">📍 {location}</p>
           <div className="details">
-            <p>🛏 {bedrooms} Bedrooms 🛁 {bathrooms} Bathrooms <br />📐 {area} Sqft.</p>
+            <p>🛏 {bedrooms} Bedrooms 🛁 {bathrooms} Bathrooms</p>
+            <p>📐 {area} Sqft.</p>
           </div>
           <hr />
           <p className="price">₹ {price} <span className="night">Per Night</span></p>
@@ -23,4 +23,3 @@ const PropertyCard = ({ id, image, title, location, area, price, bedrooms, bathr
 };
 
 export default PropertyCard;
-

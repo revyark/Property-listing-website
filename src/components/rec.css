@@ -6,14 +6,16 @@
     justify-content: flex-start;
     padding: 20 0;
 }
-.app{
-    margin-left:10px;
-    gap:5px;
+.app h1{
+    margin-left:50px;
+}
+.subtitle-rec{
+    margin-left:50px;
 }
 .btn{
     align-self: center;
-    background-color: rgb(237, 138, 39);
-    border-color: rgb(237, 138, 39) ;
+    background-color: #ff69b4;
+    border-color: #ff69b4 ;
     border-radius: 10px;
     margin-left:550px;
     color:white;

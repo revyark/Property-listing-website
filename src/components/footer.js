@@ -10,7 +10,7 @@ const Footer = () => {
         <tbody>
           <tr style={{ verticalAlign: 'top' }}>
             <td>
-              <h2 style={{ color: '#f28c5b' }}>AGAR</h2>
+              <h2 style={{ color: '#ff69b4' }}>BOOKISH</h2>
             </td>
             <td>
               <h4>About Us</h4>

@@ -7,8 +7,8 @@ export default function Imgdiv() {
     <>
     <div className="d1" style={{backgroundImage: `url(${pt1})`,backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
         <div className="d2">
-        <h3>Your digital partner for hassle-free Renting — <span className="s1">AGAR</span></h3>
-        <p>With live-support, quick signup, and highly-rated guests, hosting on AGAR can feel like a vacation.</p>
+        <h3>Your digital partner for hassle-free Renting — <span className="s1">BOOKISH</span></h3>
+        <p>With live-support, quick signup, and highly-rated guests, hosting on BOOKISH can feel like a vacation.</p>
            <button className="b1"><a href="/list">List Your property</a></button>
            <table>
             <tr className="tr1">

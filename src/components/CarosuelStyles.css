@@ -58,6 +58,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        gap:20px;
     }
 }
 .search-input {
@@ -162,7 +163,7 @@
 }
 
 .guest-button:hover {
-  border-color: #fb923c;
+  border-color: #f93c9b;
 }
 
 .guest-count {
@@ -212,7 +213,7 @@
 }
 
 input:checked + .slider {
-  background-color: #fb923c;
+  background-color: #ff69b4;
 }
 
 input:checked + .slider:before {

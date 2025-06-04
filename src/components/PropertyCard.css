@@ -1,14 +1,4 @@
-.property-card {
-    width: 260px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    background: white;
-    overflow: hidden;
-    margin: 15px;
-    transition: transform 0.2s;
-    height:325px;
-    gap:5px;
-  }
+
 .property-link {
   text-decoration: none;
   color: #ff69b4; /* Apply orange to all text inside the card */
@@ -18,42 +8,70 @@
 .property-link:hover {
   color: #ff69b4; /* Optional: darker shade on hover */
 }
+.property-card {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  min-height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  overflow: hidden;
+  margin: 15px;
+  transition: transform 0.2s;
+}
 
-  .property-card:hover {
-    transform: scale(1.03);
-  }
-  
-  .property-image {
-    width: 100%;
-    height: 125px;
-    object-fit: cover;
-  }
-  .property-content{
-    margin-left:15px;
-  }
-  
-  .property-content h3 {
-    font-size: 5px;
-    font-weight: bold;
-  }
-  
-  .location {
-    font-size: 10px;
-    color: gray;
-  }
-  
-  .details {
-    display: flex;
-    flex-direction: column;
-    font-size: 5px;
-  }
-  
-  .price {
-    font-weight: bold;
-    font-size: 10px;
-  }
-  
-  .night {
-    color: gray;
-    font-size: 10px;
-  }
+.property-card:hover {
+  transform: scale(1.03);
+}
+
+.property-image {
+  width: 45%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-content {
+  width: 55%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.property-content h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.location {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 8px;
+}
+
+.details {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.property-content hr {
+  margin: 8px 0;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  margin-top: auto;
+}
+
+.night {
+  color: gray;
+  font-size: 0.9rem;
+}
