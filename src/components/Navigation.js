@@ -6,14 +6,14 @@ function Navi() {
     <>
       <nav className="nhere">
         <div className="nav-left">
-          <span className="nav-text">AGAR</span>
+          <span className="nav-text">BOOKISH</span>
         </div>
         <div className="nav-right">
           <Link to="/">English</Link>
           <Link to="/signup">Signup</Link>
           <Link to="/login">Login</Link>
           <Link to="/dashboard/listings">
-            <div className="list">List your space</div>
+            <div className="list">Start hosting</div>
           </Link>
         </div>
       </nav>

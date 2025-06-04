@@ -20,7 +20,7 @@
         margin-left: 10px;
         font-weight: bold;
         font-size: 30px;
-        color: rgb(236, 131, 78);
+        color: #ff69b4;
 }
 .nhere a {
         margin-left: 15px;
@@ -30,11 +30,11 @@
 .list {
         margin-left: 15px;
         display: inline-block;
-        color: green;
+        color: #984ebb;
         cursor: pointer;
         border-radius: 10px;
         border-width: 1px;
         border-style: solid;
-        border-color: rgb(67, 65, 65);
+        border-color: #984ebb;
         padding: 5px 10px;
 }

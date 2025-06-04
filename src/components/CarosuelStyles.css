@@ -68,7 +68,7 @@
     font-size: 1rem;
 }
 .search-button {
-    background-color: #fb923c;
+    background-color: #ff69b4;
     padding: 0.75rem 1rem;
     border-radius: 9999px;
     color: white;
@@ -77,7 +77,7 @@
     font-size: 1.25rem;
 }
 .search-button:hover {
-    background-color: #f97316;
+    background-color: #ff69b4;
 }
 .relative {
     position: relative;

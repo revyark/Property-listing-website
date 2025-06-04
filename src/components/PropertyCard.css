@@ -11,12 +11,12 @@
   }
 .property-link {
   text-decoration: none;
-  color: orange; /* Apply orange to all text inside the card */
+  color: #ff69b4; /* Apply orange to all text inside the card */
   display: block;
 }
 
 .property-link:hover {
-  color: darkorange; /* Optional: darker shade on hover */
+  color: #ff69b4; /* Optional: darker shade on hover */
 }
 
   .property-card:hover {
