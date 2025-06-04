@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import pt1 from './images/pt1.jpg';
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -12,31 +14,49 @@ const Signup = () => {
     birthDay: '',
     birthYear: '',
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setError('');
+    try {
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        navigate('/login');
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (err) {
+      setError('Network error');
+    }
   };
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'July', 'August', 'September', 'October', 'November', 'December',
   ];
-
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
 
   return (
     <div className="signup-container">
-      <div className="signup-image" style={{backgroundImage: `url(${pt1})`}}></div>
+      <div className="signup-image" style={{ backgroundImage: `url(${pt1})` }}></div>
       <div className="signup-form">
         <h1 className="logo">AGAR</h1>
-        <h2 className="tagline">Log in to unlock the best of <span className="highlight">AGAR.</span></h2>
+        <h2 className="tagline">
+          Log in to unlock the best of <span className="highlight">AGAR.</span>
+        </h2>
 
         <form onSubmit={handleSubmit}>
           <label>First Name *</label>
@@ -86,9 +106,9 @@ const Signup = () => {
 
           <button type="submit" className="signup-button">Sign Up</button>
         </form>
-
+        {error && <p className="error">{error}</p>}
         <p className="login-link">
-          Already a member? <a href="#">Log In</a>
+          Already a member? <a href="/login">Log In</a>
         </p>
       </div>
     </div>

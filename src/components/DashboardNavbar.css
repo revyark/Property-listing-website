@@ -1,0 +1,105 @@
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 14px 32px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff69b4;
+  justify-self: start;
+}
+
+.nav-center {
+  justify-self: center;
+  gap: 24px;
+}
+
+.nav-link-globe{
+  color:#ff69b4
+}
+.nav-link {
+  color: #ff69b4;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left:600px;
+}
+
+
+.globe {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff69b4;
+}
+
+.list-space-btn {
+  border: 1px solid #984ebb;
+  background-color: transparent;
+  color: #984ebb;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.list-space-btn:hover {
+  background-color: #f0fdfa;
+}
+
+.profile {
+  justify-self: end;
+  gap: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.chevron {
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  overflow: hidden;
+}
+
+.dropdown a {
+  display: block;
+  padding: 10px 16px;
+  color: #444;
+  text-decoration: none;
+}
+
+.dropdown a:hover {
+  background-color: #f2f2f2;
+}
