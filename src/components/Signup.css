@@ -20,7 +20,7 @@ body {
   background-size: cover;
   background-position: center;
   filter: brightness(80%);
-  background-color: #c2771a;
+  background-color: #ff69b4;
 }
 
 .signup-form {
@@ -35,7 +35,7 @@ body {
 .logo {
   font-size: 36px;
   font-weight: bold;
-  color: #ea985d;
+  color: #ff69b4;
   margin-bottom: 0;
 }
 
@@ -46,8 +46,8 @@ body {
   color: #333;
 }
 
-.highlight {
-  color: #c2771a;
+.highlight2 {
+  color: #ff69b4;
 }
 
 form {
@@ -87,9 +87,9 @@ input, select {
   flex: 1;
 }
 
-.password-hint {
+.password-hint-signup {
   font-size: 12px;
-  color: red;
+  color: #984ebb;
   margin-top: 5px;
 }
 
@@ -107,16 +107,16 @@ input, select {
   margin-top: 30px;
   padding: 12px;
   font-size: 16px;
-  background-color: #ea985d;
+  background-color: #ff69b4;
   color: white;
-  border: 1px solid #ea985d;
+  border: 1px solid #ff69b4;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .signup-button:hover {
-  background-color: #d77e3f;
+  background-color: #ff69b4;
 }
 
 .login-link {
@@ -126,7 +126,7 @@ input, select {
 }
 
 .login-link a {
-  color: #2a8e5c;
+  color: #984ebb;
   text-decoration: none;
   font-weight: 500;
 }

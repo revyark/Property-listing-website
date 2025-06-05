@@ -53,9 +53,9 @@ const Signup = () => {
     <div className="signup-container">
       <div className="signup-image" style={{ backgroundImage: `url(${pt1})` }}></div>
       <div className="signup-form">
-        <h1 className="logo">AGAR</h1>
+        <h1 className="logo">BOOKISH</h1>
         <h2 className="tagline">
-          Log in to unlock the best of <span className="highlight">AGAR.</span>
+          Log in to unlock the best of <span className="highlight2">BOOKISH.</span>
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ const Signup = () => {
 
           <label>Password *</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-          <p className="password-hint">
+          <p className="password-hint-signup">
             Password must be at least 8 characters long, with an uppercase, lowercase letter, and special character.
           </p>
 

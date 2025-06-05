@@ -1,10 +1,13 @@
 import React from 'react';
+import { FaCreditCard } from 'react-icons/fa';
+import './DashboardComponents.css';
 
 export default function Payouts() {
   return (
-    <div>
+    <div className="dashboard-component">
+      <div className="icon-placeholder"><FaCreditCard /></div>
       <h1>Payouts</h1>
-      <p>This is the Payouts component.</p>
+      <p>Manage your payout methods and history here.</p>
     </div>
   );
 }
