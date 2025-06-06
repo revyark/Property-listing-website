@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import './ListingStep5.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './DashboardNavbar';
 import Footer from './footer';
+
 const commonAmenities = [
   "Essentials", "Air Conditioning", "Internet", "Indoor Fireplace", "Shampoo",
   "Washer", "Breakfast", "Smoking Allowed", "Pets live on this property",
@@ -18,63 +18,104 @@ const safetyAmenities = [
 ];
 
 const AmenitiesForm = () => {
+  const navigate = useNavigate();
+  const [amenities, setAmenities] = useState([]);
+  const [safetyFeatures, setSafetyFeatures] = useState([]);
+  const [error, setError] = useState('');
 
-    const navigate = useNavigate();
-
-  const handleContinue = () => {
-    navigate('/dashboard/listings/step6');
-  };
-  const [selectedAmenities, setSelectedAmenities] = useState([]);
-
-  const handleCheckboxChange = (event) => {
+  const handleAmenityChange = (event) => {
     const { value, checked } = event.target;
-    setSelectedAmenities((prev) =>
+    setAmenities((prev) =>
       checked ? [...prev, value] : prev.filter((item) => item !== value)
     );
   };
 
+  const handleSafetyChange = (event) => {
+    const { value, checked } = event.target;
+    setSafetyFeatures((prev) =>
+      checked ? [...prev, value] : prev.filter((item) => item !== value)
+    );
+  };
+  const token=localStorage.getItem('access_token')
+  console.log(token)
+  const handleContinue = async () => {
+    setError('');
+    try {
+      const response = await fetch('http://localhost:5000/api/dashboard/amenities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${token}`,
+        },
+        credentials:'include',
+        body: JSON.stringify({
+          amenities: amenities.join(','),
+          safety_features: safetyFeatures.join(',')
+        })
+      });
+      console.log({
+  amenities: amenities.join(','),
+  safety_features: safetyFeatures.join(',')
+});
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data);
+        navigate('/dashboard/listings/step6');
+      } else {
+        setError(data.error);
+      }
+    } catch (err) {
+      setError("Network error occurred");
+    }
+  };
+
   return (
     <>
-    <Navbar/>
-    <div className="amenities-form">
-      <div className="section">
-        <h3>Common Amenities <span className="required">*</span></h3>
-        <div className="grid">
-          {commonAmenities.map((item, index) => (
-            <label key={index} className="checkbox-label">
-              <input
-                type="checkbox"
-                value={item}
-                onChange={handleCheckboxChange}
-              />
-              {item}
-            </label>
-          ))}
+      <Navbar />
+      <div className="amenities-form">
+        <div className="section">
+          <h3>Common Amenities <span className="required">*</span></h3>
+          <div className="grid">
+            {commonAmenities.map((item, index) => (
+              <label key={index} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  value={item}
+                  onChange={handleAmenityChange}
+                  name="amenities"
+                />
+                {item}
+              </label>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="section">
-        <h3>Safety Amenities</h3>
-        <div className="grid">
-          {safetyAmenities.map((item, index) => (
-            <label key={index} className="checkbox-label">
-              <input
-                type="checkbox"
-                value={item}
-                onChange={handleCheckboxChange}
-              />
-              {item}
-            </label>
-          ))}
+        <div className="section">
+          <h3>Safety Amenities</h3>
+          <div className="grid">
+            {safetyAmenities.map((item, index) => (
+              <label key={index} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  value={item}
+                  onChange={handleSafetyChange}
+                  name="safety_features"
+                />
+                {item}
+              </label>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="button-group">
-        <button className="btn back">Back</button>
-        <button className="btn next" onClick={handleContinue}>Next</button>
+        <div className="button-group">
+          <button className="btn back">Back</button>
+          <button className="btn next" onClick={handleContinue}>Next</button>
+        </div>
+
+        {error && <p className="error">{error}</p>}
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 };

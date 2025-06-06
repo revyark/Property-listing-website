@@ -31,7 +31,7 @@ hr {
 }
 
 .upload-btn {
-  background-color: #c98a39;
+  background-color: #984ebb;
   color: white;
   border: none;
   padding: 6px 14px;
@@ -42,7 +42,7 @@ hr {
 }
 
 .upload-btn:hover {
-  background-color: #b5772d;
+  background-color: #984ebb;
 }
 
 .image-note {
@@ -69,19 +69,19 @@ hr {
 }
 
 .btn.back {
-  border-color: red;
-  color: red;
+  border-color: #984ebb;
+  color: #984ebb;
 }
 
 .btn.back:hover {
-  background-color: #ffe5e5;
+  background-color: #984ebb85;
 }
 
 .btn.next {
-  border-color: orange;
-  color: orange;
+  border-color: #ff69b4;
+  color: #ff69b4;
 }
 
 .btn.next:hover {
-  background-color: #fff0db;
+  background-color: #ff69b496;
 }

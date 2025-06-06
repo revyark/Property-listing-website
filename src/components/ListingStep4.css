@@ -67,8 +67,8 @@ select {
 .back-button {
   padding: 10px 20px;
   background-color: transparent;
-  color: #e74c3c;
-  border: 2px solid #e74c3c;
+  color: #984ebb;
+  border: 2px solid #984ebb;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
@@ -76,7 +76,7 @@ select {
 
 .next-button {
   padding: 10px 20px;
-  background-color: #f39c12;
+  background-color: #ff69b4;
   color: white;
   border: none;
   border-radius: 6px;
@@ -85,10 +85,10 @@ select {
 }
 
 .back-button:hover {
-  background-color: #e74c3c;
+  background-color: #984ebb85;
   color: white;
 }
 
 .next-button:hover {
-  background-color: #e67e22;
+  background-color: #ff69b496 ;
 }

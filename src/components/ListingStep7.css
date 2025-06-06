@@ -73,7 +73,7 @@ select {
 }
 
 .highlight {
-  color: #d4911c;
+  color: #ff69b4;
 }
 
 .options {
@@ -110,19 +110,19 @@ select {
 }
 
 .btn.back {
-  border-color: red;
-  color: red;
+  border-color: #984ebb;
+  color: #984ebb;
 }
 
 .btn.back:hover {
-  background-color: #ffe5e5;
+  background-color: #984ebb85;
 }
 
 .btn.next {
-  border-color: orange;
-  color: orange;
+  border-color: #ff69b4;
+  color: #ff69b4;
 }
 
 .btn.next:hover {
-  background-color: #fff0db;
+  background-color: #ff69b496;
 }

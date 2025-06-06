@@ -61,21 +61,21 @@
 }
 
 .back-btn {
-  color: #e74c3c;
-  border-color: #e74c3c;
+  color: #984ebb;
+  border-color: #984ebb;
   background: transparent;
 }
 
 .back-btn:hover {
-  background-color: #fdecea;
+  background-color: #984ebb85;
 }
 
 .next-btn {
-  color: #e67e22;
-  border-color: #e67e22;
+  color: #ff69b4;
+  border-color:#ff69b4 ;
   background: transparent;
 }
 
 .next-btn:hover {
-  background-color: #fff4e6;
+  background-color: #ff69b496;
 }

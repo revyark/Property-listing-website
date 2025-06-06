@@ -41,14 +41,20 @@
 .mainctnr p,h1{
     margin-left:200px;
 }
+
+#city{
+    width:420px;
+}
+
 .list-btn{
-    background-color: #ffffff;
     border-width:0.5px;
     border-style:solid;
-    border-color:green;
-    color:green;
-    width:200px;
-    height:30px;
-    align-self:left;
-    align-items: left;
+    border-color:#984ebb;
+    width:180px;
+    height:20px;
+    align-self:right;
+    align-items: right;
+    color:white;
+    background-color:#984ebb;
+    border-radius:2px;
 }

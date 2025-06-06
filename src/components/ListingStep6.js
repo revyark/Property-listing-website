@@ -17,14 +17,40 @@ const PhotoUploadForm = () => {
     setSelectedFile(e.target.files[0]);
   };
 
-  const handleUpload = () => {
-    if (selectedFile) {
-      alert(`File "${selectedFile.name}" uploaded successfully.`);
-      // Add actual upload logic here
+ const handleUpload = async () => {
+  if (!selectedFile) {
+    alert("Please select a file to upload.");
+    return;
+  }
+
+  const token = localStorage.getItem("access_token");
+  const formData = new FormData();
+  formData.append("photo", selectedFile);
+
+  try {
+    const response = await fetch("http://localhost:5000/api/dashboard/photo", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      credentials: 'include', // important to maintain session (for session['prop_id'])
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("File uploaded successfully!");
+      console.log(data);
     } else {
-      alert("Please select a file to upload.");
+      alert("Upload failed: " + data.error);
+      console.error(data);
     }
-  };
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    alert("Network error during file upload.");
+  }
+};
 
   return (
     <>

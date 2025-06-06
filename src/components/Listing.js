@@ -65,10 +65,10 @@ export default function Listing() {
                 </div>
                 <div className="formfield">
                    <label htmlFor="city">City</label>
-                   <input id="city" type="text"  />
+                   <input id="city" type="text" className="city-input"/>
                 </div>
 
-                <button className="list-btn">Continue</button>
+                <button className="list-btn" id="ctn-btn">Continue</button>
             </form>
         </div>
     </div>

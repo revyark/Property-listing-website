@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout.js";
 import Signup from "./components/signup";
+import Verify from "./components/verify_otp";
 import Login from "./components/login";
 import Home from "./components/Home";
 import PropertyDetails from "./components/PropertyDetails.js";
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <Home /> }, 
       { path: "signup", element: <Signup /> },
+      { path: "verify_otp",element:<Verify/>},
       { path: "login", element: <Login /> },
       { path: "property/:id", element: <PropertyDetails /> } 
     ]

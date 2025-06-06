@@ -22,8 +22,12 @@ const Login = () => {
         credentials: 'include',
         body: JSON.stringify(formData),
       });
+
       const data = await response.json();
+      console.log(data)
       if (response.ok) {
+        // After successful login:
+        localStorage.setItem("access_token", data["access_token"]);
         navigate('/dashboard');
       } else {
         setError(data.error || 'Login failed');
