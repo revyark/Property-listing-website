@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react";
 import "./Dashboard.css";
-
+import {Link} from "react-router-dom";
 function Dashboard() {
   const [lists,setLists]=useState(0)
   const token=localStorage.getItem('access_token')
@@ -36,7 +36,7 @@ function Dashboard() {
         <div className="card">
           <div className="icon">📋</div>
           <div className="label">My Lists</div>
-          <div className="value">{lists}</div>
+          <div className="value"><Link to="/dashboard/User_listing">{lists}</Link></div>
         </div>
         <div className="card">
           <div className="icon">🧳</div>

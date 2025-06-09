@@ -1,0 +1,42 @@
+.user_list{
+    width:950px;
+    height:150px;
+    border: 0px solid rgba(53, 53, 53, 0.584);
+    border-radius:5px;
+    background-color:white;
+    box-shadow: 10px 10px 5px rgba(188, 196, 198, 0.646);
+    display:flex;
+    flex-direction: row;
+}
+.user-list-img{
+    width:200px;
+    height:110px;
+    margin-left:10px;
+    margin-top: 20px;
+    border-radius:5px;
+}
+.user_list_desc{
+    width:400px;
+    height:122px;
+    margin-left:10px;
+    margin-top:10px;
+}
+.user_list_desc h3{
+    margin-right:50px;
+    color: #ff69b4;
+}
+.user_list_btn{
+    width:300px;
+    margin-top:70px;
+    gap:10px;
+    display:flex;
+    flex:row;
+}
+.ul1-btn{
+    width:70px;
+    height:30px;
+    border: 1px solid #ff69b4;
+    border-radius:5px;
+    background-color:#ff69b4;
+    color:white;
+}

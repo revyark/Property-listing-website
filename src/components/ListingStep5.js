@@ -69,7 +69,9 @@ const AmenitiesForm = () => {
       setError("Network error occurred");
     }
   };
-
+  const handleBack=(e)=>{
+    navigate('/dashboard/listings/step4')
+  }
   return (
     <>
       <Navbar />
@@ -109,7 +111,7 @@ const AmenitiesForm = () => {
         </div>
 
         <div className="button-group">
-          <button className="btn back">Back</button>
+          <button className="btn back" onClick={handleBack}>Back</button>
           <button className="btn next" onClick={handleContinue}>Next</button>
         </div>
 

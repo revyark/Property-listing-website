@@ -51,13 +51,16 @@ const PhotoUploadForm = () => {
     alert("Network error during file upload.");
   }
 };
+  const handleBack=(e)=>{
+    navigate('/dashboard/listings/step5')
+  }
 
   return (
     <>
     <Navbar/>
     <div className="photo-upload-form">
       <h3>Upload Photos</h3>
-      <hr />
+      <hr className="line-comp"/>
       <div className="upload-box">
         <input type="file" onChange={handleFileChange} />
         <button className="upload-btn" onClick={handleUpload}>Upload</button>
@@ -65,7 +68,7 @@ const PhotoUploadForm = () => {
       <p className="image-note">(Width 640px and Height 360px)</p>
 
       <div className="button-group">
-        <button className="btn back">Back</button>
+        <button className="btn back" onClick={handleBack}>Back</button>
         <button className="btn next" onClick={handleContinue}>Next</button>
       </div>
     </div>

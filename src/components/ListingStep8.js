@@ -59,7 +59,6 @@ const SetPriceModal = ({ isOpen, onClose, onSubmit, selectedRange }) => {
       alert("Failed to set price.");
     }
   };
-
   if (!isOpen) return null;
 
   return (

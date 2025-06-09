@@ -50,6 +50,9 @@ const RoomAndListingForm = () => {
       setError('Network error');
     }
   };
+  const handleBack=(e)=>{
+    navigate('/dashboard/listings/step1')
+  }
   return (
     <>
       <Navbar />
@@ -117,7 +120,7 @@ const RoomAndListingForm = () => {
 
         {/* Buttons */}
         <div className="form-buttons">
-          <button className="btn back-btn">Back</button>
+          <button className="btn back-btn" onClick={handleBack}>Back</button>
           <button className="btn next-btn" type="submit">Next</button>
         </div>
       </form>

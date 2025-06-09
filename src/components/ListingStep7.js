@@ -82,7 +82,9 @@ const PricingForm = () => {
       alert("Something went wrong while saving pricing.");
     }
   };
-
+  const handleBack=(e)=>{
+    navigate('/dashboard/listings/step6')
+  }
   return (
     <>
       <Navbar />
@@ -190,7 +192,7 @@ const PricingForm = () => {
         </div>
 
         <div className="button-group">
-          <button className="btn back">Back</button>
+          <button className="btn back" onClick={handleBack}>Back</button>
           <button className="btn next" onClick={handleContinue}>Next</button>
         </div>
       </div>

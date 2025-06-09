@@ -43,6 +43,9 @@ const LocationForm = () => {
       setError('Network Error')
     }
   };
+  const handleBack=(e)=>{
+    navigate('/dashboard/listings/step3')
+  }
   return (
     <>
     <Navbar/>
@@ -281,7 +284,7 @@ const LocationForm = () => {
         </div>
 
         <div className="button-group">
-          <button type="button" className="back-button">Back</button>
+          <button type="button" className="back-button" onClick={handleBack}>Back</button>
           <button type="submit" className="next-button">Next</button>
         </div>
       </form>

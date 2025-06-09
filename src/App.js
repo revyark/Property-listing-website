@@ -26,7 +26,8 @@ import Payouts from "./components/Payouts";
 import Transactions from "./components/Transactions";
 import Profile from "./components/Profile";
 import Reviews from "./components/Reviews";
-
+import User_listing from "./components/User_listing";
+import Password_reset from "./components/Password_reset";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
       { path: "signup", element: <Signup /> },
       { path: "verify_otp",element:<Verify/>},
       { path: "login", element: <Login /> },
-      { path: "property/:id", element: <PropertyDetails /> } 
+      { path: "property/:id", element: <PropertyDetails /> },
+      { path: "reset_pass",element: <Password_reset/>}
     ]
   },
   {
@@ -44,6 +46,7 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { path: "", element: <DashboardHome /> },
+      { path: "User_listing", element: <User_listing/>},
       { path: "inbox", element: <Inbox /> },
       { path: "bookings", element: <Bookings /> },
       { path: "trips", element: <Trips /> },

@@ -53,6 +53,7 @@ const Login = () => {
           <input type="password" name="password" value={formData.password} onChange={handleChange} required />
           <button type="submit" className="login-button">Log in</button>
         </form>
+        <p><a href="/reset_pass"><span className="forgot-pass">Forgot password?</span></a></p>
         {error && <p className="error">{error}</p>}
         <p className="register-link">
           Don't have an account? <a href="/signup">Register</a>
