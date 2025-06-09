@@ -172,7 +172,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 1500;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -367,7 +367,9 @@
   position: absolute;
   top: 60%;  /* right below input */
   left: 0;
-  z-index: 1000;  /* higher than other elements */
+  z-index: 1100;  /* increased to be higher than ListingStep8 modal overlay */
   background: white; /* or appropriate */
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  max-width: 450px; /* increased width to fit calendar properly */
+  width: 100%;
 }

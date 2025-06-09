@@ -90,7 +90,8 @@
   border-radius: 0.5rem !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  max-width: 350px;
+  max-width: 450px; /* increased width to fit calendar properly */
+  width: 100%;
 }
 
 /* Prevent weird layout blowout */
@@ -106,7 +107,22 @@
   background-color: white;
   padding: 1rem;
   border-radius: 0.75rem;
-  z-index: 20;
+  z-index: 1000; /* increased z-index to avoid being overlapped */
+}
+
+/* Dedicated calendar dropdown styles for carosuel */
+.carosuel-calendar-dropdown {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background-color: white !important;
+  padding: 1rem !important;
+  border-radius: 0.75rem !important;
+  z-index: 1000 !important;
+  min-width: 450px !important;
+  width: 100% !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
+  overflow: hidden !important;
 }
 .guest-dropdown {
   position: absolute;

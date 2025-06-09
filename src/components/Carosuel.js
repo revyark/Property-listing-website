@@ -73,7 +73,7 @@ const HeroCarousel = () => {
         value={formatDisplay()}
       />
       {showCalendar && (
-        <div className="absolute z-50 mt-2 shadow-lg">
+        <div className="carosuel-calendar-dropdown">
           <DateRange
             locale={enUS}
             editableDateInputs={true}
