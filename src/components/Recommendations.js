@@ -80,7 +80,7 @@ function Recommendations() {
         area: 3200,
         price: 39744,
     }
-
+    
   ];
 
   return (

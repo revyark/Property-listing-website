@@ -1,50 +1,87 @@
 
-import {React,useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React,{useEffect,useState} from 'react';
+import { useNavigate,useLocation } from 'react-router-dom';
 import './ListingStep4.css';
 import Navbar from './DashboardNavbar';
 import Footer from './footer';
 const LocationForm = () => {
-    const [formData,setFormData]=useState({
-        country:'',
-        addr_line1:'',
-        addr_line2:'',
-        city:'',
-        region:'',
-        zip:'',
-      })
-    const navigate = useNavigate();
-    const [error,setError]=useState('');
+  const location=useLocation();
+  const {mode='create',allSteps:rawSteps=[],listingId=null}=location.state || {};
+  const allSteps=Array.isArray(rawSteps)?rawSteps:[];
+  const step4Data=allSteps.find(step=>step.step4)?.step4 || {};
+  console.log('mode:',mode);
+  console.log('Steps:',step4Data);
+  console.log(listingId)
+  const [formData,setFormData]=useState({
+        country: step4Data.country||'',
+        addr_line1: step4Data.addr_line1||'',
+        addr_line2: step4Data.addr_line2||'',
+        city: step4Data.city||'',
+        region: step4Data.region||'',
+        zip: step4Data.zip||'',
+    })
+  const navigate = useNavigate();
+  const [error,setError]=useState('');
   const handleChange=(e)=>{
+    if (mode === 'view') return;
     setFormData({...formData,[e.target.name]:e.target.value});
   }
   const handleContinue = async(e) => {
     e.preventDefault();
+    if (mode === 'view'){
+      navigate('/dashboard/listings/step5',{
+        state:{
+          mode,
+          allSteps,
+          listingId
+        }
+      });
+      return;
+    }
     setError('');
     const token = localStorage.getItem("access_token");
+    const url=mode==='edit'
+      ? `http://localhost:5000/api/dashboard/address/update`
+      : 'http://localhost:5000/api/dashboard/address';
+    const method ='POST';
+    let requestBody = { ...formData };
+    if (mode === 'edit') {
+      requestBody = { ...requestBody, 'property_id': listingId }; // Add property_id for edit mode
+    }
+
     try{
-      const response = await fetch('http://localhost:5000/api/dashboard/address', {
-        method:'POST',
+      const response = await fetch(url, {
+        method,
         headers:{
           'Content-Type':'application/json',
           Authorization: `Bearer ${token}`,
         },
         credentials: 'include', 
-        body:JSON.stringify(formData),
+        body:JSON.stringify(requestBody),
       });
       const data=await response.json();
       if (response.ok){
         console.log(data);
-        navigate('/dashboard/listings/step5')
+        navigate('/dashboard/listings/step5',{
+          state:{
+            mode: mode === 'edit' ? 'edit' :'create',
+            allSteps: allSteps,
+            listingId: data.listingId || listingId
+          }
+        });
       } else{
-        setError(data.error);
+        setError(data.error || 'Failed to submit');
       }
     } catch(err){
       setError('Network Error')
     }
   };
   const handleBack=(e)=>{
-    navigate('/dashboard/listings/step3')
+    if (mode === 'create'){
+      navigate('/dashboard/listings/step3')
+    } else{
+      navigate(-1);
+    }
   }
   return (
     <>
@@ -57,7 +94,7 @@ const LocationForm = () => {
       <form className="location-form" onSubmit={handleContinue}>
         <div className="form-group">
           <label htmlFor="country">Country <span className="required">*</span></label>
-            <select id="country" name="country" onChange={handleChange}>
+            <select id="country" name="country" onChange={handleChange}  value={formData.country} disabled={mode ==='view'}>
     <option value="">Select a country</option>
     <option value="Afghanistan">Afghanistan</option>
     <option value="Albania">Albania</option>
@@ -258,34 +295,36 @@ const LocationForm = () => {
 
         <div className="form-group">
           <label htmlFor="address1">Address Line 1 <span className="required">*</span></label>
-          <input name="addr_line1" type="text" id="address1" placeholder="House name/number + street/road" onChange={handleChange}/>
+          <input name="addr_line1" type="text" id="address1" placeholder="House name/number + street/road" onChange={handleChange} value={formData.addr_line1} readOnly={mode === 'view'}/>
         </div>
 
         <div className="form-group">
           <label htmlFor="address2">Address Line 2</label>
-          <input name="addr_line2" type="text" id="address2" placeholder="Apt, suite, building access code" onChange={handleChange}/>
+          <input name="addr_line2" type="text" id="address2" placeholder="Apt, suite, building access code" onChange={handleChange} value={formData.addr_line2} readOnly={mode === 'view'}/>
         </div>
 
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="city">City / Town / District <span className="required">*</span></label>
-            <input name="city" type="text" id="city" onChange={handleChange}/>
+            <input name="city" type="text" id="city" onChange={handleChange} value={formData.city} readOnly={mode === 'view'}/>
           </div>
 
           <div className="form-group">
             <label htmlFor="zip">ZIP / Postal Code</label>
-            <input name="zip" type="text" id="zip" onChange={handleChange}/>
+            <input name="zip" type="text" id="zip" onChange={handleChange} value={formData.zip} readOnly={mode === 'view'}/>
           </div>
         </div>
 
         <div className="form-group">
           <label htmlFor="state">State / Province / County / Region</label>
-          <input name="region" type="text" id="state" onChange={handleChange}/>
+          <input name="region" type="text" id="state" onChange={handleChange} value={formData.region} readOnly={mode === 'view'}/>
         </div>
 
         <div className="button-group">
           <button type="button" className="back-button" onClick={handleBack}>Back</button>
-          <button type="submit" className="next-button">Next</button>
+          <button type="submit" className="next-button">
+          {mode === 'edit' ? 'Update': mode === 'view' ? 'Next': 'Next'}
+          </button>
         </div>
       </form>
     </div>

@@ -29,3 +29,109 @@
   margin-bottom: 16px;
   display: inline-block;
 }
+
+.profile-container {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.active-tab {
+  color: orange;
+  border-bottom: 2px solid orange;
+  cursor: pointer;
+}
+
+.not-verified-tab {
+  color: red;
+}
+
+.profile-form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.form-left {
+  flex: 1;
+  min-width: 400px;
+}
+
+.form-right {
+  width: 300px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+label span {
+  color: red;
+  margin-left: 2px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea,
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.phone-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.birth-date {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-pic-box {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.profile-icon {
+  color: #0077b6;
+  margin-bottom: 10px;
+}
+
+.upload-button,
+.save-button {
+  margin-top: 10px;
+  padding: 8px 20px;
+  background-color: white;
+  border: 1px solid green;
+  color: green;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: orange;
+  color: white;
+  border: none;
+}

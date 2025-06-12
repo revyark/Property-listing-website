@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ListingStep5.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './DashboardNavbar';
 import Footer from './footer';
 
@@ -19,12 +19,32 @@ const safetyAmenities = [
 
 const AmenitiesForm = () => {
   const navigate = useNavigate();
-  const [amenities, setAmenities] = useState([]);
-  const [safetyFeatures, setSafetyFeatures] = useState([]);
+  const location = useLocation();
+  const { mode = 'create', allSteps: rawSteps = [], listingId = null } = location.state || {};
+  const allSteps = Array.isArray(rawSteps) ? rawSteps : [];
+  const step5Data = allSteps.find(step => step.step5)?.step5 || {};
+
+  const [amenities, setAmenities] = useState(
+  Array.isArray(step5Data.amenities)
+    ? step5Data.amenities
+    : typeof step5Data.amenities === 'string'
+      ? step5Data.amenities.split(',')
+      : []
+);
+
+const [safetyFeatures, setSafetyFeatures] = useState(
+  Array.isArray(step5Data.safety_features)
+    ? step5Data.safety_features
+    : typeof step5Data.safety_features === 'string'
+      ? step5Data.safety_features.split(',')
+      : []
+);
+
   const [error, setError] = useState('');
 
   const handleAmenityChange = (event) => {
     const { value, checked } = event.target;
+    if (mode === 'view') return;
     setAmenities((prev) =>
       checked ? [...prev, value] : prev.filter((item) => item !== value)
     );
@@ -32,46 +52,77 @@ const AmenitiesForm = () => {
 
   const handleSafetyChange = (event) => {
     const { value, checked } = event.target;
+    if (mode === 'view') return;
     setSafetyFeatures((prev) =>
       checked ? [...prev, value] : prev.filter((item) => item !== value)
     );
   };
-  const token=localStorage.getItem('access_token')
-  console.log(token)
-  const handleContinue = async () => {
+
+  const token = localStorage.getItem('access_token');
+
+  const handleContinue = async (e) => {
+    e.preventDefault();
+    if (mode === 'view') {
+      navigate('/dashboard/listings/step6', {
+        state: { mode, allSteps, listingId }
+      });
+      return;
+    }
+
     setError('');
+    const url=mode==='edit'
+    ? `http://localhost:5000/api/dashboard/amenities/update`
+    : 'http://localhost:5000/api/dashboard/amenities'
+
+    const method ='POST';
+    let requestBody={amenities: amenities.join(','),safety_features: safetyFeatures.join(','),}
+    if (mode === 'edit'){
+      requestBody= {...requestBody,'property_id':listingId}
+    }
     try {
-      const response = await fetch('http://localhost:5000/api/dashboard/amenities', {
-        method: 'POST',
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
-           Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        credentials:'include',
-        body: JSON.stringify({
-          amenities: amenities.join(','),
-          safety_features: safetyFeatures.join(',')
-        })
+        credentials: 'include',
+        body: JSON.stringify(requestBody)
       });
-      console.log({
-  amenities: amenities.join(','),
-  safety_features: safetyFeatures.join(',')
-});
 
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
-        navigate('/dashboard/listings/step6');
+        navigate('/dashboard/listings/step6', {
+          state: {
+            mode,
+            allSteps: [
+              ...allSteps.filter(step => !step.step5),
+              {
+                step5: {
+                  amenities: amenities.join(','),
+                  safety_features: safetyFeatures.join(','),
+                }
+              }
+            ],
+            listingId: data.listingId || listingId
+          }
+        });
       } else {
-        setError(data.error);
+        setError(data.error || 'Failed to submit');
       }
     } catch (err) {
       setError("Network error occurred");
     }
   };
-  const handleBack=(e)=>{
-    navigate('/dashboard/listings/step4')
-  }
+
+  const handleBack = () => {
+    if (mode === 'create') {
+      navigate('/dashboard/listings/step4');
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -84,8 +135,10 @@ const AmenitiesForm = () => {
                 <input
                   type="checkbox"
                   value={item}
-                  onChange={handleAmenityChange}
                   name="amenities"
+                  onChange={handleAmenityChange}
+                  checked={amenities.includes(item)}
+                  disabled={mode === 'view'}
                 />
                 {item}
               </label>
@@ -101,8 +154,10 @@ const AmenitiesForm = () => {
                 <input
                   type="checkbox"
                   value={item}
-                  onChange={handleSafetyChange}
                   name="safety_features"
+                  onChange={handleSafetyChange}
+                  checked={safetyFeatures.includes(item)}
+                  disabled={mode === 'view'}
                 />
                 {item}
               </label>
@@ -112,7 +167,9 @@ const AmenitiesForm = () => {
 
         <div className="button-group">
           <button className="btn back" onClick={handleBack}>Back</button>
-          <button className="btn next" onClick={handleContinue}>Next</button>
+          <button className="btn next" onClick={handleContinue}>
+            {mode === 'edit' ? 'Update' : mode === 'view' ? 'Next' : 'Next'}
+          </button>
         </div>
 
         {error && <p className="error">{error}</p>}

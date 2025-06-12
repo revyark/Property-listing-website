@@ -62,7 +62,7 @@ const router = createBrowserRouter([
     element: <ListingLayout />,
     children: [
       { path: "", element: <ListingStep1 /> },
-      { path: "step2", element: <ListingStep2 /> },
+      { path: "step2", element: <ListingStep2 mode='create' /> },
       { path: "step3", element: <ListingStep3 /> },
       { path: "step4", element: <ListingStep4 /> },
       { path: "step5", element: <ListingStep5 /> },

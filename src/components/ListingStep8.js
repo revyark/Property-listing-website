@@ -143,19 +143,22 @@ export default function ListingStep8() {
     endDate: new Date(),
     key: 'selection'
   });
+  const [pendingRange, setPendingRange] = useState(null); // <--- TEMP holder
 
   const handleSelect = (ranges) => {
-    setSelectedRange(ranges.selection);
-    setModalOpen(true);
+    setPendingRange(ranges.selection); // set to temp
+    setModalOpen(true);                // open modal
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setPendingRange(null);
   };
 
   const handleSubmit = (data) => {
     console.log('Backend response:', data);
     setModalOpen(false);
+    setPendingRange(null);
   };
 
   return (
@@ -174,7 +177,7 @@ export default function ListingStep8() {
           isOpen={modalOpen}
           onClose={handleCloseModal}
           onSubmit={handleSubmit}
-          selectedRange={selectedRange}
+          selectedRange={pendingRange || selectedRange} // use temp
         />
       </div>
       <Footer />

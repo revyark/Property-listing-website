@@ -2,11 +2,12 @@ import React from 'react';
 import './DashboardSidebar.css';
 import { FaTachometerAlt, FaInbox, FaSuitcase, FaHeart, FaCreditCard, FaMoneyBillAlt, FaUser, FaStar, FaBookmark } from 'react-icons/fa';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation,useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const location = useLocation();
-
+  const navigate=useNavigate();
+  const token=localStorage.getItem('access_token')
   return (
     <div className="sidebar">
       <ul className="sidebar-menu">

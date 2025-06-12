@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './ListingStep7.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './DashboardNavbar';
 import Footer from './footer';
 
 const PricingForm = () => {
   const navigate = useNavigate();
+  const location =useLocation();
 
-  const [nightlyPrice, setNightlyPrice] = useState('');
-  const [currency, setCurrency] = useState('INR');
+  const {mode ='create',allSteps:rawSteps=[],listingId=null}=location.state || {};
+  const allSteps = Array.isArray(rawSteps) ? rawSteps : [];
+  const step7Data = allSteps.find(step => step.step7)?.step7 || {};
+  console.log('mode:', mode);
+  console.log('allSteps:', allSteps);
+  const [nightlyPrice, setNightlyPrice] = useState(step7Data.nightly_price||0);
+  const [currency, setCurrency] = useState(step7Data.currency||'INR');
 
   const [options, setOptions] = useState({
     cleaningFee: true,
@@ -18,13 +24,13 @@ const PricingForm = () => {
   });
 
   const [values, setValues] = useState({
-    cleaningFee: 0,
-    additionalGuests: 0,
-    addnlAfter: 0, // ✅ New field
-    securityDeposit: 0,
-    weekendPricing: 0,
-    weeklyDiscount: 0,
-    monthlyDiscount: 0,
+    cleaningFee: step7Data.cleaning_fee|| 0,
+    additionalGuests: step7Data.addnl_guests|| 0,
+    addnlAfter: step7Data.addnl_after|| 0, // ✅ New field
+    securityDeposit: step7Data.security_deposit|| 0,
+    weekendPricing: step7Data.weekend_pricing|| 0,
+    weeklyDiscount: step7Data.weekly_discount_percentage|| 0,
+    monthlyDiscount: step7Data.monthly_discount_percentage|| 0,
   });
 
   const [showWeeklyDiscount, setShowWeeklyDiscount] = useState(false);
@@ -35,15 +41,20 @@ const PricingForm = () => {
   };
 
   const handleChange = (key, value) => {
+    if (mode === 'view') return;
     setValues((prev) => ({ ...prev, [key]: value }));
   };
 
   const toggleWeeklyDiscount = () => setShowWeeklyDiscount(prev => !prev);
   const toggleMonthlyDiscount = () => setShowMonthlyDiscount(prev => !prev);
 
-  const handleContinue = async () => {
+  const handleContinue = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("access_token");
-
+    if (mode === 'view'){
+      navigate('/dashboard');
+      return;
+    }
     const payload = {
       nightly_price: parseInt(nightlyPrice),
       currency: currency,
@@ -55,16 +66,23 @@ const PricingForm = () => {
       security_deposit: options.securityDeposit ? parseInt(values.securityDeposit) : 0,
       weekend_pricing: options.weekendPricing ? parseInt(values.weekendPricing) : 0
     };
-
+    
+    const url=mode==='edit'
+     ?`http://localhost:5000/api/dashboard/pricing/update`
+     : 'http://localhost:5000/api/dashboard/pricing'
+    let requestBody={...payload};
+    if(mode==='edit'){
+      requestBody= {...payload,'property_id':listingId}
+    }
     try {
-      const response = await fetch("http://localhost:5000/api/dashboard/pricing", {
-        method: "POST",
+      const response = await fetch(url, {
+        method: 'POST',
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
         credentials: "include",
-        body: JSON.stringify(payload),
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
@@ -72,7 +90,7 @@ const PricingForm = () => {
       if (response.ok) {
         alert("Pricing saved!");
         console.log(data);
-        navigate('/dashboard/listings/step8');
+        navigate('/dashboard')
       } else {
         console.error(data);
         alert("Error saving pricing: " + data.error);
@@ -83,7 +101,11 @@ const PricingForm = () => {
     }
   };
   const handleBack=(e)=>{
-    navigate('/dashboard/listings/step6')
+    if (mode === 'create'){
+      navigate('/dashboard/listings/step6')
+    }else{
+      navigate(-1);
+    }
   }
   return (
     <>
@@ -100,12 +122,13 @@ const PricingForm = () => {
                   type="number"
                   value={nightlyPrice}
                   onChange={(e) => setNightlyPrice(e.target.value)}
+                  readOnly={mode === "view"}
                 />
               </div>
             </div>
             <div className="input-group">
               <label>Currency</label>
-              <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+              <select value={currency} onChange={(e) => setCurrency(e.target.value)}  disabled={mode === 'view'}>
                 <option value="INR">INR</option>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
@@ -130,6 +153,7 @@ const PricingForm = () => {
                   type="number"
                   value={values.weeklyDiscount}
                   onChange={(e) => handleChange('weeklyDiscount', e.target.value)}
+                  readOnly={mode === "view"}
                 />
               </div>
             </div>
@@ -143,6 +167,7 @@ const PricingForm = () => {
                   type="number"
                   value={values.monthlyDiscount}
                   onChange={(e) => handleChange('monthlyDiscount', e.target.value)}
+                  readOnly={mode === "view"}
                 />
               </div>
             </div>
@@ -159,6 +184,7 @@ const PricingForm = () => {
                     type="checkbox"
                     checked={options[key]}
                     onChange={() => toggleOption(key)}
+                    readOnly={mode === "view"}
                   />
                   {key
                     .replace(/([A-Z])/g, ' $1')
@@ -171,6 +197,7 @@ const PricingForm = () => {
                       type="number"
                       value={values[key]}
                       onChange={(e) => handleChange(key, e.target.value)}
+                      readOnly={mode === "view"}
                     />
                   </div>
                 )}
@@ -185,6 +212,7 @@ const PricingForm = () => {
                   type="number"
                   value={values.addnlAfter}
                   onChange={(e) => handleChange('addnlAfter', e.target.value)}
+                  readOnly={mode === "view"}
                 />
               </div>
             </div>
@@ -193,7 +221,9 @@ const PricingForm = () => {
 
         <div className="button-group">
           <button className="btn back" onClick={handleBack}>Back</button>
-          <button className="btn next" onClick={handleContinue}>Next</button>
+          <button className="btn next" onClick={handleContinue}>
+            {mode === 'edit'?'Update':mode ==='view'?'Next':'Next'}
+          </button>
         </div>
       </div>
       <Footer />
