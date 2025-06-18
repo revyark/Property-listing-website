@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 export default function Verify() {
+    const {flag}=useParams()
     const [Otp,setOtp]=useState({
         otp:''
     });
@@ -21,7 +22,7 @@ export default function Verify() {
             });
             const data=await response.json();
             if (response.status==201){
-                navigate('/login');
+                navigate(`/login/${flag}`);
             }else{
                 setError(data.error || 'Invalid OTP');
             }

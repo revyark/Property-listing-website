@@ -7,6 +7,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const token=localStorage.getItem('access_token')
   const [Name,setName]=useState('');
+  const [profile,setProfile]=useState('');
   const navigate=useNavigate();
   useEffect(()=>{
     const fetchName=async()=>{
@@ -21,6 +22,7 @@ const Navbar = () => {
         const data=await response.json();
         if (response.ok){
           setName(data.Name)
+          setProfile(data.User_photo)
         } else{
           console.error(data.error || "Failed to fetch")
         }
@@ -55,7 +57,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       {/* Left: Logo */}
-      <div className="nav-section logo">BOOKISH</div>
+      <Link to="/" className="bookish-tag"><div className="nav-section logo">BOOKISH</div></Link>
 
       {/* Center: Navigation */}
       <div className="nav-section nav-center">
@@ -70,6 +72,7 @@ const Navbar = () => {
 
       {/* Right: Profile Dropdown */}
       <div className="nav-section profile" onClick={() => setDropdownOpen(!dropdownOpen)}>
+        <span><img src={profile} className="navbar-profile-image"/></span>
         <span className="profile-name">{Name}</span>
         <FaChevronDown className="chevron" />
         {dropdownOpen && (

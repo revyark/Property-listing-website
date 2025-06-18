@@ -9,7 +9,9 @@
   top: 0;
   z-index: 1000;
 }
-
+.bookish-tag{
+  text-decoration:None;
+}
 .nav-section {
   display: flex;
   align-items: center;
@@ -102,4 +104,10 @@
 
 .dropdown a:hover {
   background-color: #f2f2f2;
+}
+
+.navbar-profile-image{
+  width: 32px;
+  height:30px;
+  border-radius:10px;
 }

@@ -2,6 +2,7 @@ import './Navigation.css';
 import { Link } from 'react-router-dom';
 
 function Navi() {
+  let f=0;
   return (
     <>
       <nav className="nhere">
@@ -10,8 +11,8 @@ function Navi() {
         </div>
         <div className="nav-right">
           <Link to="/">English</Link>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
+          <Link to={`/signup/${f}`}>Signup</Link>
+          <Link to={`/login/${f}`}>Login</Link>
           <Link to="/dashboard/listings">
             <div className="list">Start hosting</div>
           </Link>

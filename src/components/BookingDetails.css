@@ -1,0 +1,90 @@
+.bookingdetails-container {
+  position: relative; /* Ensures absolute children are aligned correctly */
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  color:#984ebb;
+}
+.bookingdetails-container h2{
+  position: relative; /* Ensures absolute children are aligned correctly */
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  color:#984ebb;
+}
+
+/* Prevent global button styles from affecting calendar buttons */
+.bookingdetails-calendar-dropdown .rdrDay button {
+  all: unset; /* removes inherited styles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 36px;
+  background: transparent;
+  color:#ff69b4;
+}
+
+
+.bookingdetails-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookingdetails-form label {
+  margin-top: 10px;
+  font-weight: bold;
+  color:#984ebb;
+}
+
+.bookingdetails-form input {
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.bookingdetailsbutton{
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bookingdetails-form button:hover {
+  background-color: #ff69b48d;
+}
+
+.bookingdetails-success-message {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
+}
+
+.bookingdetails-error-message {
+  margin-top: 15px;
+  color: red;
+  font-weight: bold;
+}
+
+.bookingdetails-date-input {
+  padding: 8px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+
+
+

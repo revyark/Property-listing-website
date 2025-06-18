@@ -17,7 +17,7 @@ import ListingStep5 from "./components/ListingStep5";
 import ListingStep6 from "./components/ListingStep6";
 import ListingStep7 from "./components/ListingStep7";
 import ListingStep8 from "./components/ListingStep8";
-
+import Billing from "./components/Billing";
 import Inbox from "./components/Inbox";
 import Bookings from "./components/Bookings";
 import Trips from "./components/Trips";
@@ -28,17 +28,24 @@ import Profile from "./components/Profile";
 import Reviews from "./components/Reviews";
 import User_listing from "./components/User_listing";
 import Password_reset from "./components/Password_reset";
+import Bookingdetails from "./components/Bookingdetails.js";
+import BookingInfo from "./components/BookingInfo.js";
+import User_Booking_details from "./components/User_Booking_details.js";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />, 
     children: [
       { path: "", element: <Home /> }, 
-      { path: "signup", element: <Signup /> },
-      { path: "verify_otp",element:<Verify/>},
-      { path: "login", element: <Login /> },
+      { path: "signup/:flag", element: <Signup /> },
+      { path: "verify_otp/:flag",element:<Verify/>},
+      { path: "login/:flag", element: <Login /> },
       { path: "property/:id", element: <PropertyDetails /> },
-      { path: "reset_pass",element: <Password_reset/>}
+      { path: "reset_pass",element: <Password_reset/>},
+      { path: "booking_details/:id",element:<Bookingdetails/>},
+      { path: "bookinginfo", element: <BookingInfo/>},
+      { path: "billing",element:<Billing/>}
     ]
   },
   {
@@ -54,7 +61,8 @@ const router = createBrowserRouter([
       { path: "payouts", element: <Payouts /> },
       { path: "transactions", element: <Transactions /> },
       { path: "profile", element: <Profile /> },
-      { path: "reviews", element: <Reviews /> }
+      { path: "reviews", element: <Reviews /> },
+      { path: "user/bookingdetails/:param1/:param2", element:<User_Booking_details/>}
     ]
   },
   {

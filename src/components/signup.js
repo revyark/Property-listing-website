@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import './Signup.css';
 import pt1 from './images/pt1.jpg';
 
 const Signup = () => {
+  const {flag}=useParams()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -33,7 +34,7 @@ const Signup = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        navigate('/verify_otp');
+        navigate(`/verify_otp/${flag}`);
       } else {
         setError(data.error || 'Registration failed');
       }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import card1 from "./images/card1.png";
 import "./PropertyDetails.css";
@@ -8,10 +8,10 @@ import { DateRange } from 'react-date-range';
 import { enUS } from 'date-fns/locale';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-
+import {useNavigate} from 'react-router-dom';
 const PropertyDetails = () => {
   const { id } = useParams();
-
+  const navigate=useNavigate();
   const [modalOpen, setModalOpen] = useState(null);
 
   const openModal = (section) => {
@@ -22,16 +22,41 @@ const PropertyDetails = () => {
     setModalOpen(null);
   };
 
-  const theSpaceItems = [
+  const [details,setDetails]=useState({
+    'property_name': 'Hotel Paris Rivoli',
+    'Summary':'Situated in the famous Marais district surrounded by boutiques monuments and museums, the Hotel Paris Rivoli offers three-staraccommodations in the most desirable part of Paris.',
+    'property_type':'Apartment',
+    'property_image':card1,
+    'Accomodates':0,
+    'city':'Paris',
+    'country':'France',
+    'region':'Ille du juis',
+    'beds':0,
+    'bathrooms':0,
+    'kitchens':0,
+    'bedrooms':0,
+    'bed_type':'King',
+    'host_fname':'Snehil',
+    'host_lname':'Deo',
+    'Member_since':'February 2025',
+    'Profile_picture':user,
+    'email':'',
+    'phone':''
+  })
+  const [Languages,setLanguages]=useState([
+    'English',
+    'Arabic',
+  ])
+  const [theSpaceItems,setSpaceItems] =useState([
     "2 Kitchens",
     "16 beds",
     "8 bathrooms",
     "Parking",
     "Free Wifi",
     "Air conditioning",
-  ];
+  ]);
 
-  const popularAmenities = [
+  const [popularAmenities,setPopularAmenities] = useState([
     "Kitchen",
     "Internet",
     "Gym",
@@ -53,9 +78,9 @@ const PropertyDetails = () => {
     "Pets Allowed",
     "Pets live on this property",
     "Wheelchair Accessible"
-  ];
+  ]);
 
-  const safetyFeatures = [
+  const [safetyFeatures,setSafetyFeatures] = useState([
     "First Aid Box",
     "Safety Guard",
     "Smoke Detector",
@@ -82,7 +107,7 @@ const PropertyDetails = () => {
     "Pets Allowed",
     "Pets live on this property",
     "Wheelchair Accessible"
-  ];
+  ]);
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateRange, setDateRange] = useState([
     {
@@ -97,22 +122,56 @@ const PropertyDetails = () => {
     const end = dateRange[0].endDate.toLocaleDateString();
     return `${start} - ${end}`;
   }
+  const handleClick =()=>{
+    navigate(`/booking_details/${id}`)
+  }
+  useEffect(()=>{
+    const fetchDetails =async()=>{
+      try{
+        const response=await fetch('http://localhost:5000/api/dashboard/property/details',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+
+          },
+          credentials:'include',
+          body:JSON.stringify({'prop_id':id})
+        });
+        const data=await response.json();
+        if (response.ok){
+          console.log(data);
+           setDetails(data)
+           setLanguages(data.Languages)
+           setPopularAmenities(data.amenities)
+           setSafetyFeatures(data.safety_features)
+           setSpaceItems([`${data.kitchens} kitchens`,`${data.beds} beds`,`${data.bathrooms} bathrooms`,`${data.bed_type} bed type`,`${data.bedrooms} bedrooms`,`Accomodates ${data.Accomodates} people`])
+          }
+        else{
+          console.error(data.error)
+        }
+        
+      }catch(err){
+        console.error(err);
+      }
+    };
+    fetchDetails();
+  },[])
   return (
     <div style={{ padding: "2rem" }}>
       <h2>Property Details for ID: {id.title}</h2>
       <div>
-        <img src={card1} className="c1" />
+        <img src={details.property_image} className="c1" />
       </div>
       <div className="mainct">
         <div className="ct1">
-          <h2>Hotel Paris Rivoli</h2>
+          <h2>{details.property_name}</h2>
           <div className="location">
-            <span>📍 Paris , Île-de-France , France</span>
+            <span>📍 {details.city} , {details.region} , {details.country}</span>
           </div>
           <div className="category">
             <span>
               {" "}
-              New Alamein <span title="Info">ℹ️</span>
+              {details.city} <span title="Info">ℹ️</span>
             </span>
           </div>
           <div className="favorite-icon">❤️</div>
@@ -143,17 +202,15 @@ const PropertyDetails = () => {
       <br />
       <input type="text" placeholder="guests" className="guest-input" />
         </div>
-        <div className="ct3">🛏 16 beds</div>
-        <div className="ct3">🛁 8 bathrooms</div>
+        <div className="ct3">🛏 Accomodates:{details.Accomodates}</div>
+        <div className="ct3">🛁 Property type:{details.property_type}</div>
         <div className="ct5">
           <p className="p1">
             <h1>
               About this listing
             </h1>
             <p className="p1">
-              Situated in the famous Marais district surrounded by boutiques,
-              monuments and museums, the Hotel Paris Rivoli offers three-star
-              accommodations in the most desirable part of Paris.
+              {details.Summary}
             </p>
 
             <div className="heading-with-see-more">
@@ -169,9 +226,9 @@ const PropertyDetails = () => {
             <table className="list-tb">
               <tbody>
                 <tr>
-                  <td>2 Kitchen</td>
-                  <td>🛏 16 beds</td>
-                  <td>🛁 8 bathrooms</td>
+                  <td>{theSpaceItems[0]}</td>
+                  <td>🛏 {theSpaceItems[1]}</td>
+                  <td>🛁 {theSpaceItems[2]}</td>
                 </tr>
               </tbody>
             </table>
@@ -190,9 +247,9 @@ const PropertyDetails = () => {
             <table className="list-tb">
               <tbody>
                 <tr>
-                  <td>Parking</td>
-                  <td>🛏 Free Wifi</td>
-                  <td>🛁 Air conditioning</td>
+                  <td>{popularAmenities[0]}</td>
+                  <td>🛏 {popularAmenities[1]}</td>
+                  <td>🛁 {popularAmenities[2]}</td>
                 </tr>
               </tbody>
             </table>
@@ -211,9 +268,9 @@ const PropertyDetails = () => {
             <table className="list-tb">
               <tbody>
                 <tr>
-                  <td>First Aid Box</td>
-                  <td>🛏 Safety Guard</td>
-                  <td>🛁 Smoke Detector</td>
+                  <td>{safetyFeatures[0]}</td>
+                  <td>🛏 {safetyFeatures[1]}</td>
+                  <td>🛁 {safetyFeatures[2]}</td>
                 </tr>
               </tbody>
             </table>
@@ -235,20 +292,20 @@ const PropertyDetails = () => {
       </div>
 
       <div className="host-info">
-        <img src={user} alt="Snehil Deo" className="host-image" />
+        <img src={details.Profile_picture} alt="Snehil Deo" className="host-image" />
         <div className="host-details">
-          <div><strong>Snehil Deo</strong> Web</div>
-          <div>Member since February 2025</div>
+          <div><strong>{details.host_fname} {details.host_lname}</strong> Web</div>
+          <div>Member since {details.Member_since}</div>
         </div>
       </div>
 
       <div className="host-footer">
-        <div className="host-language">Language: English, Arabic</div>
+        <div className="host-language">Language: {Languages.join(', ')}</div>
         <div className="host-contact">📱 Contact Host</div>
       </div>
 
       <div className="host-image-banner">
-        <img src={p5} alt="City View" />
+        <img src={details.property_image} alt="City View" />
       </div>
     </div>
     </div>
@@ -299,7 +356,7 @@ const PropertyDetails = () => {
               </tr>
             </tbody>
           </table>
-          <button className="instant-book">⚡ Instant Book</button>
+          <button className="instant-book" onClick={handleClick}>⚡ Instant Book</button>
           <p className="note">You’ll be able to review before paying.</p>
         </div>
 

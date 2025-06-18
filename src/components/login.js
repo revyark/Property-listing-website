@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import './Login.css';
 import pt1 from './images/pt1.jpg';
 
@@ -7,7 +7,8 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
+  const {flag}=useParams()
+  console.log(flag)
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,7 +29,13 @@ const Login = () => {
       if (response.ok) {
         // After successful login:
         localStorage.setItem("access_token", data["access_token"]);
+        
+        if (parseInt(flag)===0){
         navigate('/dashboard');
+        }
+        else{
+          navigate('/bookinginfo');
+        }
       } else {
         setError(data.error || 'Login failed');
       }
