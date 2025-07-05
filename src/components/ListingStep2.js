@@ -79,10 +79,11 @@ const RoomAndListingForm = () => {
           }
         });
       } else {
+        console.log(data.error)
         setError(data.error || 'Failed to submit');
       }
     } catch (err) {
-      setError('Network error');
+      setError(err);
     }
   };
 

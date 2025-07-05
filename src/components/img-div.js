@@ -8,8 +8,8 @@ export default function Imgdiv() {
     <>
     <div className="d1" style={{backgroundImage: `url(${pt1})`,backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
         <div className="d2">
-        <h3>Your digital partner for hassle-free Renting — <span className="s1">BOOKISH</span></h3>
-        <p>With live-support, quick signup, and highly-rated guests, hosting on BOOKISH can feel like a vacation.</p>
+        <h3>Your digital partner for hassle-free Renting — <span className="s1">STAYBOOKER</span></h3>
+        <p>With live-support, quick signup, and highly-rated guests, hosting on STAYBOOKER can feel like a vacation.</p>
            <button className="b1"><Link to={`/login/${f}`} className="img-div-property">List Your property</Link></button>
            <table>
             <tr className="tr1">

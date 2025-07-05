@@ -4,6 +4,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import './ListingStep4.css';
 import Navbar from './DashboardNavbar';
 import Footer from './footer';
+import GoogleMapComp from './Map';
 const LocationForm = () => {
   const location=useLocation();
   const {mode='create',allSteps:rawSteps=[],listingId=null}=location.state || {};
@@ -86,6 +87,7 @@ const LocationForm = () => {
   return (
     <>
     <Navbar/>
+    <GoogleMapComp latitude={step4Data.latitude} longitude={step4Data.longitude}/>
     <div className="location-container">
       <h2>Location</h2>
 

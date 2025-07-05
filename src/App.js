@@ -31,7 +31,9 @@ import Password_reset from "./components/Password_reset";
 import Bookingdetails from "./components/Bookingdetails.js";
 import BookingInfo from "./components/BookingInfo.js";
 import User_Booking_details from "./components/User_Booking_details.js";
-
+import PaymentPage from "./components/Payment.js";
+import PaymentSuccess from "./components/PaymentSuccess.js";
+import PaymentFailed from "./components/PaymentFailed.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,7 +47,10 @@ const router = createBrowserRouter([
       { path: "reset_pass",element: <Password_reset/>},
       { path: "booking_details/:id",element:<Bookingdetails/>},
       { path: "bookinginfo", element: <BookingInfo/>},
-      { path: "billing",element:<Billing/>}
+      { path: "billing",element:<Billing/>},
+      { path: "payment",element:<PaymentPage/>},
+      { path: "paymentsuccess",element:<PaymentSuccess/>},
+      { path: "paymentfailed",element:<PaymentFailed/>}
     ]
   },
   {
@@ -76,7 +81,7 @@ const router = createBrowserRouter([
       { path: "step5", element: <ListingStep5 /> },
       { path: "step6", element: <ListingStep6 /> },
       { path: "step7", element: <ListingStep7 /> },
-      { path: "step8", element: <ListingStep8 /> }
+      { path: "step8/:id", element: <ListingStep8 /> }
     ]
   },
   {

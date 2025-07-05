@@ -48,9 +48,9 @@ const Login = () => {
     <div className="login-container">
       <div className="login-image" style={{ backgroundImage: `url(${pt1})` }}></div>
       <div className="login-form">
-        <h1 className="logo">BOOKISH</h1>
+        <h1 className="logo">STAYBOOKER</h1>
         <h2 className="tagline">
-          Log in to unlock the best of <span className="highlight1">BOOKISH.</span>
+          Log in to unlock the best of <span className="highlight1">STAYBOOKER.</span>
         </h2>
 
         <form onSubmit={handleSubmit}>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './Billing.css';
 import { useNavigate } from 'react-router-dom';
-
+import { loadStripe } from "@stripe/stripe-js";
 const Billing = () => {
   const [billData, setBillData] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
-
+  const stripePromise=loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
   useEffect(() => {
     const fetchBill = async () => {
       try {
@@ -34,27 +34,24 @@ const Billing = () => {
 
   if (loading) return <div>Loading billing info...</div>;
   if (!billData) return <div>No billing data found.</div>;
-  const handleClick= async()=>{
-    try{
-      const resp=await fetch('http://localhost:5000/api/confirm/generatebill',{
-        method:'GET',
-        headers:{
-          'Authorization':`Bearer ${token}`
-        },
-        credentials:'include',
-    });
-      const data= await resp.json()
-      if (resp.ok){
-        console.log(data)
-        navigate('/dashboard');
-      }
-      else{
-        console.log(data.error)
-      }
-    }catch(err){
-      console.log(err)
-    }
-  }
+  const handleCheckout= async()=>{
+        const response=await fetch("http://localhost:5000/api/create_payment",{
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${token}`
+            },
+            credentials:'include',
+        });
+
+        const data= await response.json();
+        const stripe= await stripePromise;
+        const result= await stripe.redirectToCheckout({
+            sessionId:data.id
+        });
+        if (result.error){
+            console.log(result.error)
+        }
+    };
   const handleCancel=async()=>{
     try{
         const res=await fetch('http://localhost:5000/api/dashboard/user/bookingbilling/delete',{
@@ -113,7 +110,7 @@ const Billing = () => {
         <h3><span>Total</span><span>₹{billData.total}</span></h3>
       </div>
       <button className="generate-bill-button" onClick={handleCancel}>Cancel Booking</button>
-      <button className="generate-bill-button" onClick={handleClick}>Confirm & Generate Bill</button>
+      <button className="generate-bill-button" onClick={handleCheckout}>Confirm & Pay</button>
     </div>
   );
 };

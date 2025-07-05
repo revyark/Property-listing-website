@@ -57,7 +57,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       {/* Left: Logo */}
-      <Link to="/" className="bookish-tag"><div className="nav-section logo">BOOKISH</div></Link>
+      <Link to="/" className="bookish-tag"><div className="nav-section logo">STAYBOOKER</div></Link>
 
       {/* Center: Navigation */}
       <div className="nav-section nav-center">

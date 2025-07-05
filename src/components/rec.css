@@ -12,7 +12,7 @@
 .subtitle-rec{
     margin-left:50px;
 }
-.btn{
+.btn-view-more{
     align-self: center;
     background-color: #ff69b4;
     border-color: #ff69b4 ;
@@ -23,4 +23,102 @@
     border-width: 0px;
     width:80px;
     height: 35px;
+}
+
+.filters-container {
+  margin:20px;
+  margin-left:50px;
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.filter-toggle {
+  width:150px;
+  align-self:left;
+  margin-right:900px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background-color 0.3s;
+}
+
+.filter-toggle:hover {
+  background-color: #ff69b496;
+}
+
+.filters-dropdown {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width:400px;
+  height:450px;
+}
+
+.filter-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+.filter-group input[type="text"],
+.filter-group input[type="number"],
+.filter-group select {
+  width: 80%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.price-range input[type="range"] {
+  width: 70%;
+  margin: 2px 0;
+}
+
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.price-inputs input {
+  width: 45%;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+}
+
+.filter-actions {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.filter-actions button {
+  padding: 8px 16px;
+  background-color: #ff69b4;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-right:350px;
+  width:150px;
+}
+
+.filter-actions button:hover {
+  background-color: #ff69b496;
 }

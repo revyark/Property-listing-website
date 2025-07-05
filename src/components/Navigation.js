@@ -7,7 +7,7 @@ function Navi() {
     <>
       <nav className="nhere">
         <div className="nav-left">
-          <span className="nav-text">BOOKISH</span>
+          <span className="nav-text">STAYBOOKER</span>
         </div>
         <div className="nav-right">
           <Link to="/">English</Link>

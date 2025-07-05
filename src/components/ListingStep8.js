@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ListingStep8.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import Navbar from './DashboardNavbar';
 import Footer from './footer';
 import { DateRange } from 'react-date-range';
@@ -16,7 +16,7 @@ const SetPriceModal = ({ isOpen, onClose, onSubmit, selectedRange }) => {
     minimumStay: '',
     status: 'available'
   });
-
+  const {id}=useParams()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -31,7 +31,8 @@ const SetPriceModal = ({ isOpen, onClose, onSubmit, selectedRange }) => {
       Check_out: formData.endDate,
       Price: parseInt(formData.price),
       Min_stay: parseInt(formData.minimumStay),
-      Status: formData.status
+      Status: formData.status,
+      id:id
     };
 
     try {

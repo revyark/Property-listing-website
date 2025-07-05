@@ -6,15 +6,16 @@ export default function User_listing() {
   const [listings, setListings] = useState([]);
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
-
+  const [page,setPage] =useState(1);
+  const [totalPages,setTotalPages]=useState(1);
   useEffect(() => {
-    const fetchListings = async () => {
+    const fetchListings = async (pageNum=1) => {
+      const token = localStorage.getItem('access_token');
       try {
-        const response = await fetch('http://localhost:5000/api/dashboard/user/listings', {
-          method: 'GET',
+        const response = await fetch(`http://localhost:5000/api/dashboard/user/listings?page=${pageNum}`, {
+          method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
           },
           credentials: 'include',
         });
@@ -22,7 +23,9 @@ export default function User_listing() {
         const data = await response.json();
         if (response.ok) {
           console.log(data);
-          setListings(data.listings || []); // Safeguard if listings is undefined
+          setListings(data.listings || []);
+          setTotalPages(data.total_pages || 1);
+          setPage(data.current_page || 1); // Safeguard if listings is undefined
         } else {
           console.error(data.error || 'Failed to fetch listings');
         }
@@ -31,8 +34,8 @@ export default function User_listing() {
       }
     };
 
-    fetchListings();
-  }, [token]);
+    fetchListings(page);
+  }, [page]);
 
   const handleView = async (id) => {
     try {
@@ -119,8 +122,8 @@ export default function User_listing() {
       console.error('Error deleting listing:', err);
     }
   };
-  const handleOnClick =()=>{
-    navigate('/dashboard/listings/step8')
+  const handleOnClick =(id)=>{
+    navigate(`/dashboard/listings/step8/${id}`)
   }
   return (
     <div className="user-listings-container">
@@ -143,11 +146,30 @@ export default function User_listing() {
               <button className="ul1-btn" onClick={() => handleView(listing.id)}>View</button>
               <button className="ul1-btn" onClick={() => handleUpdate(listing.id)}>Update</button>
               <button className="ul1-btn" onClick={() => handleDelete(listing.id)}>Delete</button>
-              <button className="ul1-btn" onClick={() => handleOnClick()}><span className="spric">Set pricing</span></button>
+              <button className="ul1-btn" onClick={() => handleOnClick(listing.id)}><span className="spric">Set pricing</span></button>
+              {/* <button className="ul1-btn" onClick={() => handleOnlive(listing.id)}>Go live/no</button> */}
             </div>
           </div>
         ))
       )}
+      <div className="pagination-controls">
+  <button
+    onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+    disabled={page === 1}
+  >
+    Prev
+  </button>
+
+  <span>Page {page} of {totalPages}</span>
+
+  <button
+    onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+    disabled={page === totalPages}
+  >
+    Next
+  </button>
+</div>
+
     </div>
   );
 }

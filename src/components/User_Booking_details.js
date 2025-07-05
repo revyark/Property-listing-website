@@ -3,6 +3,8 @@ import {useNavigate,useParams} from 'react-router-dom';
 
 export default function User_Booking_details() {
     const [myBookingsDetails, setMyBookingsDetails]=useState([]);
+    const [showReview,setShowReview]=useState(false)
+    
     const navigate=useNavigate()
     const token=localStorage.getItem('access_token')
     const {param1,param2}=useParams()
@@ -73,6 +75,7 @@ export default function User_Booking_details() {
         <hr />
         <h3><span>Total</span><span>₹{myBookingsDetails.total}</span></h3>
       </div>
+       <button className="generate-bill-button">Drop review</button>
     </div>
   );
 };

@@ -6,18 +6,20 @@ import 'react-date-range/dist/theme/default.css';
 import './BookingDetails.css';
 import { enUS } from 'date-fns/locale';
 import { useNavigate, useParams } from 'react-router-dom';
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const Bookingdetails = () => {
   const [email, setEmail] = useState('');
   const [guests, setGuests] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const { property_id } = useParams();
   const [showCalendar, setShowCalendar] = useState(false);
-  const navigate=useNavigate()
-  const id=useParams()
-  let f=0
+  const [disabledDates, setDisabledDates] = useState([]);
+  const navigate = useNavigate();
+  const id = useParams();
+  const property_id = id['id'];
+  let f = 0;
+
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -35,60 +37,85 @@ const Bookingdetails = () => {
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
+
+    const fetchBooked = async (property_id) => {
+      try {
+        const resp = await fetch("http://localhost:5000/api/dashboard/check/available", {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: 'include',
+          body: JSON.stringify({ 'prop_id': property_id }),
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+          const blocked = data.data.map(d => new Date(d));
+          setDisabledDates(blocked);
+        } else {
+          console.log(data.error);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchBooked(property_id);
+
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [property_id]);
 
   const check_in = format(dateRange[0].startDate, 'yyyy-MM-dd');
   const check_out = format(dateRange[0].endDate, 'yyyy-MM-dd');
   const nights = differenceInCalendarDays(dateRange[0].endDate, dateRange[0].startDate);
-  const token=localStorage.getItem('access_token')
+  const token = localStorage.getItem('access_token');
+
   const handleBooking = async (e) => {
     e.preventDefault();
     try {
       const res = await fetch('http://localhost:5000/api/dashboard/user/booking', {
         method: 'POST',
-        credentials:'include',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          'email':email,
-          'guests':guests,
-          'check_in':check_in,
-          'check_out':check_out,
-          'nights':nights,
-          'property_id':id['id'],
+          'email': email,
+          'guests': guests,
+          'check_in': check_in,
+          'check_out': check_out,
+          'nights': nights,
+          'property_id': id['id'],
         }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-   f = 1;
-  const currentTime = Math.floor(Date.now() / 1000);
+        f = 1;
+        const currentTime = Math.floor(Date.now() / 1000);
 
-  if (token) {
-    try {
-      const decoded = jwtDecode(token);
-      if (decoded.exp && decoded.exp > currentTime) {
-        navigate('/bookinginfo');
+        if (token) {
+          try {
+            const decoded = jwtDecode(token);
+            if (decoded.exp && decoded.exp > currentTime) {
+              navigate('/bookinginfo');
+            } else {
+              setMessage('Session expired, please log in again.');
+              navigate(`/login/${f}`);
+            }
+          } catch (err) {
+            console.error('Invalid token');
+            navigate(`/login/${f}`);
+          }
+        } else if (data.message === "Registered") {
+          setMessage(data.message);
+          navigate(`/login/${f}`);
+        } else {
+          navigate(`/signup/${f}`);
+        }
+
+        setError('');
       } else {
-        setMessage('Session expired, please log in again.');
-        navigate(`/login/${f}`);
-      }
-    } catch (err) {
-      console.error('Invalid token');
-      navigate(`/login/${f}`);
-    }
-  } else if (data.message === "Registered") {
-    setMessage(data.message);
-    navigate(`/login/${f}`);
-  } else {
-    navigate(`/signup/${f}`);
-  }
-
-  setError('');
-} else {
         setMessage('');
         setError(data.error || 'Something went wrong');
       }
@@ -138,6 +165,7 @@ const Bookingdetails = () => {
               ranges={dateRange}
               months={1}
               direction="horizontal"
+              disabledDates={disabledDates}
             />
           </div>
         )}

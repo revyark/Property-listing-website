@@ -55,9 +55,9 @@ const Signup = () => {
     <div className="signup-container">
       <div className="signup-image" style={{ backgroundImage: `url(${pt1})` }}></div>
       <div className="signup-form">
-        <h1 className="logo">BOOKISH</h1>
+        <h1 className="logo">STAYBOOKER</h1>
         <h2 className="tagline">
-          Log in to unlock the best of <span className="highlight2">BOOKISH.</span>
+          Log in to unlock the best of <span className="highlight2">STAYBOOKER.</span>
         </h2>
 
         <form onSubmit={handleSubmit}>

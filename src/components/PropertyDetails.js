@@ -9,6 +9,7 @@ import { enUS } from 'date-fns/locale';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import {useNavigate} from 'react-router-dom';
+import GoogleMapComp from "./Map";
 const PropertyDetails = () => {
   const { id } = useParams();
   const navigate=useNavigate();
@@ -157,6 +158,7 @@ const PropertyDetails = () => {
     fetchDetails();
   },[])
   return (
+    <>
     <div style={{ padding: "2rem" }}>
       <h2>Property Details for ID: {id.title}</h2>
       <div>
@@ -312,46 +314,51 @@ const PropertyDetails = () => {
     </div>
 
         <div className="ct4" >
+          <p>Standard fee for a night for one guest</p>
           <table>
             <tbody>
               <tr>
-                <td>0 Nights</td>
-                <td>0 ℹ️</td>
+                <td>1 Nights</td>
+                <td>{details.service_fee} ℹ️</td>
               </tr>
               <tr>
                 <td>Service Fee</td>
-                <td>0</td>
+                <td>{details.service_fee}</td>
               </tr>
               <tr>
                 <td>Additional Guest fee</td>
-                <td>0</td>
+                <td>{details.addnl_guest_fee}</td>
               </tr>
               <tr>
                 <td>Security Fee</td>
-                <td>0</td>
+                <td>{details.security_fee}</td>
               </tr>
               <tr>
                 <td>Cleaning Fee</td>
-                <td>0</td>
+                <td>{details.cleaning_fee}</td>
               </tr>
               <tr>
                 <td>I.V.A Tax</td>
-                <td>0</td>
+                <td>{details.iva_tax}</td>
               </tr>
               <tr>
                 <td>Accommodation Tax</td>
-                <td>0</td>
+                <td>{details.acc_tax}</td>
               </tr>
               <tr>
-                <td>Discount</td>
-                <td>0</td>
+                <td>Discount(Weekly)</td>
+                <td>{details.weekly_discount} %</td>
+              </tr>
+              <tr>
+                <td>Discount(Monthly)</td>
+                <td>{details.monthly_discount} %</td>
               </tr>
               <tr>
                 <td>
                   <strong>Total</strong>
                 </td>
                 <td>
-                  <strong>0</strong>
+                  <strong>{details.service_fee+details.security_fee+details.cleaning_fee+details.iva_tax+details.acc_tax}</strong>
                 </td>
               </tr>
             </tbody>
@@ -389,7 +396,8 @@ const PropertyDetails = () => {
         )}
       </div>
     </div>
-
+    <GoogleMapComp latitude={details.latitude} longitude={details.longitude} />
+    </>
   );
 };
 

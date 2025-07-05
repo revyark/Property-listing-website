@@ -10,7 +10,7 @@ const Footer = () => {
         <tbody>
           <tr style={{ verticalAlign: 'top' }}>
             <td>
-              <h2 style={{ color: '#ff69b4' }}>BOOKISH</h2>
+              <h2 style={{ color: '#ff69b4' }}>STAYBOOKER</h2>
             </td>
             <td>
               <h4>About Us</h4>
@@ -52,7 +52,7 @@ const Footer = () => {
 
       {/* Bottom copyright */}
       <div style={{ marginTop: '40px', textAlign: 'center', fontSize: '14px' }}>
-        © 2025 Agar Inc. Designed and Developed by Tycho Technologies.
+        © 2025 StayBooker Inc. Designed and Developed by Tycho Technologies.
       </div>
     </div>
   );
